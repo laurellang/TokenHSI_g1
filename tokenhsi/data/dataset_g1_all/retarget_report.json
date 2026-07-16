@@ -1,0 +1,1963 @@
+{
+  "smplx_root": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx",
+  "output_root": "/home/lenovo/Projects/GMR/data/tokenhsi_required_g1",
+  "converted_motion_count": 94,
+  "converted_amass_count": 94,
+  "copied_existing_loco_count": 0,
+  "missing_count": 0,
+  "unsupported_found_count": 0,
+  "converted_motions": [
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "BMLrub/rub001/0017_circle_walk_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/BMLrub/rub001/0017_circle_walk_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/BMLrub/rub001/0017_circle_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0008/0008_Walking002_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0008/0008_Walking002_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0008/0008_Walking002_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0005/0005_Walking001_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0005/0005_Walking001_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0005/0005_Walking001_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0007/0007_Walking001_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0007/0007_Walking001_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0007/0007_Walking001_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "KIT/11/WalkInClockwiseCircle09_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/KIT/11/WalkInClockwiseCircle09_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/KIT/11/WalkInClockwiseCircle09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/downstairs04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/downstairs04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/downstairs04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/upstairs_downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/upstairs_downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/upstairs_downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/183/upstairs10_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/183/upstairs10_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/183/upstairs10_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/downstairs04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/downstairs04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/downstairs04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/upstairs09_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/upstairs09_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/upstairs09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/upstairs_downstairs03_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/upstairs_downstairs03_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/upstairs_downstairs03_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs03_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs03_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs03_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/downstairs07_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/downstairs07_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/downstairs07_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/upstairs07_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/upstairs07_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/upstairs07_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/183/downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/183/downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/183/downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/downstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/downstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/downstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/3/downstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/downstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/3/downstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/upstairs_downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/upstairs_downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/upstairs_downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/423/upstairs09_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/423/upstairs09_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/423/upstairs09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/3/upstairs_downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/upstairs_downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/3/upstairs_downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B19_-_walk_to_pick_up_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B19 - walk to pick up box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B19_-_walk_to_pick_up_box_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1General_c3d/A5_-_pick_up_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1General_c3d/A5 - pick up box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1General_c3d/A5_-_pick_up_box_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B21_-_put_down_box_to_walk_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B21 - put down box to walk_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B21_-_put_down_box_to_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B20_-_walk_with_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B20 - walk with box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B20_-_walk_with_box_stageii.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_006",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4257,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_006.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_007",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4258,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_007.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_008",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4259,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_008.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_009",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4260,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_009.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_010",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4261,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_010.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_011",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4262,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_011.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_042",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4292,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_042.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_043",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4293,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_043.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_044",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4294,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_044.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_045",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4295,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_045.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_046",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4296,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_046.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_047",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4297,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_047.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_046",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4343,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_046.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_047",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4344,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_047.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_048",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4345,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_048.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_049",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4346,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_049.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_051",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4347,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_051.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/83/83_27_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/83/83_27_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/83/83_27_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/141/141_08_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/141/141_08_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/141/141_08_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/107/107_10_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/107/107_10_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/107/107_10_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/36/36_14_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/36/36_14_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/36/36_14_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/36/36_04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/36/36_04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/36/36_04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/40/40_08_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/40/40_08_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/40/40_08_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/3/upstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/upstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/3/upstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/572/stomp_left01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/572/stomp_left01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/572/stomp_left01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/572/stomp_right01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/572/stomp_right01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/572/stomp_right01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "EKUT/265/BEAMN01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/EKUT/265/BEAMN01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/EKUT/265/BEAMN01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_stageii.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo001_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo001_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo001_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo002_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo002_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo002_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo003_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo003_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo003_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo004_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo004_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo004_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo005_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo005_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo005_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo006_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo006_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo006_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo007_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo007_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo007_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo008_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo008_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo008_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo009_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo009_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo009_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo010_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo010_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo010_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo011_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo011_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo011_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo012_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo012_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo012_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo013_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo013_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo013_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo014_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo014_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo014_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo015_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo015_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo015_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo016_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo016_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo016_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo017_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo017_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo017_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo018_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo018_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo018_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo019_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo019_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo019_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair001_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair001_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair001_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair003_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair003_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair003_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair010_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair010_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair010_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair012_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair012_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair012_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair018_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair018_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair018_stageII.npz"
+    }
+  ],
+  "converted_amass": [
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B10_-_walk_turn_left_(45)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B11_-_walk_turn_left_(135)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B12_-_walk_turn_right_(90)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B13_-_walk_turn_right_(45)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B14_-_walk_turn_right_(135)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B15_-_walk_turn_around_(same_direction)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B16_-_walk_turn_change_direction_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B1_-_stand_to_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B2_-_walk_to_stand_t2_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B3_-_walk1_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/ACCAD/Female1Walking_c3d/B9_-_walk_turn_left_(90)_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "BMLrub/rub001/0017_circle_walk_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/BMLrub/rub001/0017_circle_walk_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/BMLrub/rub001/0017_circle_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0008/0008_Walking002_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0008/0008_Walking002_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0008/0008_Walking002_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0005/0005_Walking001_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0005/0005_Walking001_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0005/0005_Walking001_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "SFU/0007/0007_Walking001_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/SFU/0007/0007_Walking001_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/SFU/0007/0007_Walking001_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco",
+        "loco"
+      ],
+      "motion": "KIT/11/WalkInClockwiseCircle09_stageii.npz",
+      "source_path": "/home/lenovo/Projects/holosoma/data/KIT/11/WalkInClockwiseCircle09_stageii.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco/loco/KIT/11/WalkInClockwiseCircle09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/downstairs04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/downstairs04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/downstairs04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/upstairs_downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/upstairs_downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/upstairs_downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/183/upstairs10_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/183/upstairs10_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/183/upstairs10_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/downstairs04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/downstairs04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/downstairs04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/upstairs09_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/upstairs09_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/upstairs09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/359/upstairs_downstairs03_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/359/upstairs_downstairs03_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/359/upstairs_downstairs03_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs03_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs03_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs03_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/downstairs07_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/downstairs07_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/downstairs07_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/upstairs07_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/upstairs07_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/upstairs07_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/183/downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/183/downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/183/downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/167/downstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/167/downstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/167/downstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/3/downstairs05_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/downstairs05_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/3/downstairs05_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/513/upstairs_downstairs06_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/513/upstairs_downstairs06_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/513/upstairs_downstairs06_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/423/upstairs09_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/423/upstairs09_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/423/upstairs09_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/424/upstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/424/upstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/424/upstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "loco_stairs",
+        "composite"
+      ],
+      "motion": "KIT/3/upstairs_downstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/upstairs_downstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/loco_stairs/composite/KIT/3/upstairs_downstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B19_-_walk_to_pick_up_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B19 - walk to pick up box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B19_-_walk_to_pick_up_box_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1General_c3d/A5_-_pick_up_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1General_c3d/A5 - pick up box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1General_c3d/A5_-_pick_up_box_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B21_-_put_down_box_to_walk_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B21 - put down box to walk_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B21_-_put_down_box_to_walk_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "carry",
+        "composite"
+      ],
+      "motion": "ACCAD/Female1Walking_c3d/B20_-_walk_with_box_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/ACCAD/ACCAD/Female1Walking_c3d/B20 - walk with box_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/carry/composite/ACCAD/Female1Walking_c3d/B20_-_walk_with_box_stageii.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_006",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4257,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_006.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_007",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4258,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_007.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_008",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4259,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_008.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_009",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4260,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_009.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_010",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4261,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_010.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_011",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4262,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_011.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_042",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4292,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_042.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_043",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4293,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_043.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_044",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4294,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_044.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_045",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4295,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_045.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_046",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4296,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_046.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_largebox_047",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4297,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_largebox_047.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_046",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4343,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_046.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_047",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4344,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_047.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_048",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4345,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_048.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_049",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4346,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_049.npz"
+    },
+    {
+      "section": [
+        "OMOMO",
+        "omomo",
+        "carry"
+      ],
+      "motion": "sub7_smallbox_051",
+      "source_path": "/home/lenovo/下载/OMOMO/train_diffusion_manip_seq_joints24.p",
+      "source_split": "train",
+      "source_key": 4347,
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/OMOMO/omomo/carry/sub7_smallbox_051.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/83/83_27_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/83/83_27_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/83/83_27_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/141/141_08_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/141/141_08_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/141/141_08_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/107/107_10_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/107/107_10_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/107/107_10_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/36/36_14_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/36/36_14_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/36/36_14_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/36/36_04_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/36/36_04_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/36/36_04_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "CMU/40/40_08_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/CMU/40/40_08_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/CMU/40/40_08_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/3/upstairs01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/3/upstairs01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/3/upstairs01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/572/stomp_left01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/572/stomp_left01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/572/stomp_left01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "KIT/572/stomp_right01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/KIT/KIT/572/stomp_right01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/KIT/572/stomp_right01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "EKUT/265/BEAMN01_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/EKUT/265/BEAMN01_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/EKUT/265/BEAMN01_stageii.npz"
+    },
+    {
+      "section": [
+        "AMASS",
+        "climb",
+        "climb"
+      ],
+      "motion": "Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_stageii.npz",
+      "source_path": "/home/lenovo/下载/AMASS/Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_poses.npz",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/AMASS/climb/climb/Eyes_Japan_Dataset/ichige/jump-13-matrix-ichige_stageii.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo001_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo001_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo001_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo002_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo002_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo002_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo003_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo003_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo003_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo004_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo004_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo004_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo005_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo005_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo005_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo006_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo006_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo006_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo007_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo007_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo007_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo008_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo008_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo008_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo009_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo009_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo009_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo010_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo010_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo010_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo011_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo011_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo011_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo012_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo012_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo012_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo013_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo013_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo013_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo014_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo014_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo014_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo015_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo015_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo015_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo016_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo016_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo016_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo017_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo017_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo017_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo018_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo018_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo018_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "chair_mo019_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/chair_mo019_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/chair_mo019_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair001_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair001_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair001_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair003_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair003_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair003_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair010_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair010_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair010_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair012_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair012_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair012_stageII.npz"
+    },
+    {
+      "section": [
+        "SAMP",
+        "sit",
+        "sit"
+      ],
+      "motion": "armchair018_stageII.pkl",
+      "source_path": "/home/lenovo/下载/SAMP/armchair018_stageII.pkl",
+      "smplx_path": "/home/lenovo/Projects/GMR/data/tokenhsi_required_smplx/SAMP/sit/sit/armchair018_stageII.npz"
+    }
+  ],
+  "missing": [],
+  "unsupported_found": []
+}

@@ -1,0 +1,209 @@
+TOKENHSI reward 总结
+=====================
+
+范围
+----
+本文根据当前仓库中的多任务环境与 AMP 训练代码整理：
+- 环境任务文件：tokenhsi/env/tasks/multi_task/humanoid_traj_sit_carry_climb.py
+- 当前打开的环境配置：tokenhsi/data/cfg/multi_task/amp_g1_dex3_traj_sit_carry_climb.yaml
+- AMP 训练配置：tokenhsi/data/cfg/train/rlg/amp_imitation_task_transformer_multi_task.yaml
+
+总 reward 结构
+--------------
+训练时实际进入 PPO 的 reward 由两部分组合：
+
+  combined_reward = task_reward_w * task_reward + disc_reward_w * disc_reward
+
+当前训练配置中：
+- task_reward_w = 0.5
+- disc_reward_w = 0.5
+- disc_reward_scale = 2
+- reward_shaper.scale_value = 1
+
+其中 task_reward 来自环境任务本身，disc_reward 来自 AMP 判别器 imitation reward。
+
+
+一、环境 task reward
+-------------------
+多任务环境支持 4 个任务：
+
+1. traj reward
+   函数：compute_traj_reward
+
+   用途：
+   - 鼓励 humanoid root 的 xy 位置跟随轨迹目标点。
+
+   形式：
+   - 计算 root_pos.xy 与 tar_pos.xy 的平方距离 pos_err。
+   - reward = exp(-2.0 * pos_err)
+
+
+2. sit reward
+   函数：compute_sit_reward
+
+   用途：
+   - 远处时鼓励朝座椅/目标物移动。
+   - 近处时鼓励 root 到达坐下目标位置。
+   - 可选地惩罚靠近目标后速度过低或 z 方向角速度过低/异常。
+
+   主要组成：
+   - reward_far_vel：沿目标方向的速度 reward。
+   - reward_near：root_pos 接近 tar_pos 的 reward。
+   - 总体 reward = 0.7 * reward_near + 0.3 * reward_far_final
+
+   当前配置：
+   - sit_vel_penalty = True
+   - sit_vel_pen_coeff = 0.5
+   - sit_vel_pen_threshold = 1.3
+   - sit_ang_vel_pen_coeff = 0.5
+   - sit_ang_vel_pen_threshold = 3.0
+   - tarSpeed = 1.0
+
+
+3. carry reward
+   carry 任务不是单个 reward，而是 4 个子 reward 相加：
+
+     carry_task_reward = walk_r + carry_r + handheld_r + putdown_r
+
+   3.1 walk reward
+       函数：compute_walk_reward
+
+       用途：
+       - 鼓励 humanoid 走向箱子并靠近箱子。
+
+       主要组成：
+       - pos_reward：root 与 box 的 xy 距离 reward。
+       - vel_reward：root 沿 box 方向移动的速度 reward。
+
+       当前配置 onlyVelReward = True，因此：
+       - walk_r = 0.2 * vel_reward
+
+   3.2 carry reward
+       函数：compute_carry_reward
+
+       用途：
+       - 鼓励把箱子搬到目标位置。
+       - 箱子高度太低时关闭远距离位置 reward 和速度 reward，避免学到踢箱子。
+       - 可选地加入 box velocity penalty，避免僵硬抓取或异常速度。
+
+       主要组成：
+       - pos_reward_far：box.xy 接近 target.xy。
+       - pos_reward_near：box.xyz 接近 target.xyz。
+       - vel_reward：box 沿 target 方向移动的速度 reward。
+       - root_vel_penalty/box_vel_penalty：箱子速度惩罚项。
+
+       当前配置 onlyVelReward = True，因此：
+       - carry_r = 0.2 * vel_reward + 0.2 * pos_reward_near + box_vel_penalty
+
+       当前配置：
+       - box_vel_penalty = True
+       - box_vel_pen_coeff = 1.0
+       - box_vel_pen_threshold = 2.5
+       - tarSpeed = 1.0
+       - boxLiftHeightMargin = 0.15
+
+   3.3 handheld reward
+       函数：compute_handheld_reward
+
+       用途：
+       - 鼓励双手靠近箱子。
+       - 只有 box 与 humanoid root 的水平距离不超过 handRewardActiveDist 时才激活。
+
+       形式：
+       - hands2box = exp(-5.0 * hands2box_pos_err)
+       - handheld_r = 0.2 * hands2box
+
+       当前配置：
+       - onlyHeightHandHeldReward = False，使用双手平均位置到箱子的 xyz 距离。
+       - handRewardActiveDist = 0.7
+
+   3.4 putdown reward
+       函数：compute_putdown_reward
+
+       用途：
+       - 鼓励箱子在目标 xy 附近时放到目标高度。
+
+       形式：
+       - 当 abs(box.z - target.z) <= 0.001 且 xy 距离平方 <= 0.1^2 时给 1，否则 0。
+       - putdown_r = 0.2 * binary_reward
+
+
+4. climb reward
+   函数：compute_climb_reward
+
+   用途：
+   - 鼓励 humanoid 接近可攀爬物体。
+   - 鼓励向物体方向移动。
+   - 鼓励 root 接近攀爬目标位置。
+   - 鼓励双脚达到目标高度附近。
+   - 可选地加入速度惩罚。
+
+   主要组成：
+   - pos_reward：root.xy 接近 object.xy，但当前公式权重为 0.0。
+   - vel_reward：root 沿 object 方向移动的速度 reward。
+   - pos_reward_near：root.xyz 接近 climb target。
+   - feet_height_reward：双脚平均高度接近目标高度。
+
+   当前公式：
+   - climb_reward = 0.0 * pos_reward + 0.2 * vel_reward + 0.5 * pos_reward_near + 0.3 * feet_height_reward + climb_vel_penalty
+
+   当前配置：
+   - climb_vel_penalty = True
+   - climb_vel_pen_coeff = 1.0
+   - climb_vel_pen_threshold = 1.3
+   - tarSpeed = 1.0
+   - feetHeightRewardScale = 30.0
+
+
+5. power reward / power penalty
+   位置：_compute_reward
+
+   用途：
+   - 惩罚关节力矩与关节速度产生的功率消耗。
+
+   形式：
+   - power = sum(abs(dof_force * dof_vel))
+   - power_reward = -power_coefficient * power
+
+   当前配置：
+   - power_reward = True
+   - power_coefficient = 0.0005
+
+   因此环境输出：
+   - task_reward = 当前任务 reward + power_reward
+
+
+二、AMP discriminator reward
+---------------------------
+函数：
+- amp_agent.py::_calc_disc_rewards
+- amp_agent.py::_combine_rewards
+
+用途：
+- 通过 AMP 判别器鼓励策略生成的动作/状态更像 motion demo。
+
+形式：
+- disc_logits = discriminator(amp_obs)
+- prob = sigmoid(disc_logits)
+- disc_reward = -log(max(1 - prob, 0.0001))
+- disc_reward *= disc_reward_scale
+
+当前配置：
+- disc_reward_scale = 2
+- 最终与环境 task_reward 按 0.5 / 0.5 混合。
+
+
+简表
+----
+TOKENHSI 当前多任务配置中主要用了这些 reward：
+
+1. traj reward：轨迹 xy 位置跟踪。
+2. sit reward：接近座椅/坐下目标 + 速度/角速度惩罚。
+3. carry reward：
+   - walk reward：人走向箱子。
+   - carry reward：箱子移动到目标。
+   - handheld reward：手靠近箱子。
+   - putdown reward：箱子在目标附近落到目标高度。
+4. climb reward：接近攀爬物、朝目标移动、root 到达目标、脚部高度匹配 + 速度惩罚。
+5. power reward：实际是能耗负 reward / penalty。
+6. AMP disc reward：判别器 imitation reward。

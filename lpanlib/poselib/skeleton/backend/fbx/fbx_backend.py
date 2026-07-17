@@ -40,9 +40,19 @@ import numpy as np
 try:
     import fbx
     import FbxCommon
-except ImportError as e:
-    print("Error: FBX library failed to load - importing FBX data will not succeed. Message: {}".format(e))
-    print("FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html")
+    _FBX_IMPORT_ERROR = None
+except Exception as e:
+    fbx = None
+    FbxCommon = None
+    _FBX_IMPORT_ERROR = e
+
+
+def _require_fbx():
+    if _FBX_IMPORT_ERROR is not None:
+        raise ImportError(
+            "FBX tools must be installed before importing FBX motion data. "
+            "Original import error: {}".format(_FBX_IMPORT_ERROR)
+        ) from _FBX_IMPORT_ERROR
 
 
 def fbx_to_npy(file_name_in, root_joint_name, fps):
@@ -58,6 +68,7 @@ def fbx_to_npy(file_name_in, root_joint_name, fps):
     :param file_name_in: str, file path in. Should be .fbx file
     :return: nothing, it just writes a file.
     """
+    _require_fbx()
 
     # Create the fbx scene object and load the .fbx file
     fbx_sdk_manager, fbx_scene = FbxCommon.InitializeSdkObjects()
@@ -271,4 +282,5 @@ def _recursive_to_list(array):
 
 
 def parse_fbx(file_name_in, root_joint_name, fps):
+    _require_fbx()
     return fbx_to_npy(file_name_in, root_joint_name, fps)

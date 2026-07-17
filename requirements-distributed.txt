@@ -1,0 +1,3 @@
+# Optional dependencies for single-node multi-GPU training.
+# Install this on the remote training server after the base requirements.
+horovod[pytorch]

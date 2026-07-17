@@ -20,7 +20,7 @@ env:
   rootHeightObsPolicy: False # policy obs
   motion_file: "tokenhsi/data/dataset_g1_all.yaml"
   keyBodies: ["right_wrist_yaw_link", "left_wrist_yaw_link", "right_ankle_roll_link", "left_ankle_roll_link"]
-  contactBodies: ["right_ankle_roll_link", "left_ankle_roll_link"]
+  contactBodies: ["right_ankle_pitch_link", "right_ankle_roll_link", "left_ankle_pitch_link", "left_ankle_roll_link"]
   terminationHeight: 0.15
   enableEarlyTermination: True
 

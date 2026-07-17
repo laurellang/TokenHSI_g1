@@ -1,5 +1,5 @@
 <mujoco model="g1_29dof_with_hands_scene">
-   <compiler angle="radian" meshdir="../meshes/unitree_g1"/>
+   <compiler angle="radian" meshdir="meshes"/>
 
   <option integrator="implicitfast"/>
 

@@ -1,6 +1,8 @@
-python ./tokenhsi/run.py --task HumanoidTrajSitCarryClimb \
-  --cfg_train tokenhsi/data/cfg/train/rlg/amp_imitation_task_transformer_multi_task.yaml \
-  --cfg_env tokenhsi/data/cfg/multi_task/amp_g1_dex3_traj_sit_carry_climb.yaml \
-  --motion_file tokenhsi/data/dataset_g1_all.yaml \
-  --num_envs 4096 \
-  --headless
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Backward-compatible entrypoint for the original single-task command.
+# Main config: tokenhsi/data/cfg/multi_task/amp_g1_dex3_traj_sit_carry_climb.yaml
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+exec bash "${SCRIPT_DIR}/g1_tokenhsi_single_gpu_train.sh" "$@"

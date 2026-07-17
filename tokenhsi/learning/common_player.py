@@ -26,6 +26,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import os
 import torch 
 
 from rl_games.algos_torch import players
@@ -34,6 +35,48 @@ from rl_games.algos_torch.running_mean_std import RunningMeanStd
 from rl_games.common.player import BasePlayer
 
 import numpy as np
+
+
+class RolloutRecorder:
+    def __init__(self):
+        self.path = os.environ.get("TOKENHSI_RECORD_ROLLOUT_NPZ", "")
+        self.env_id = int(os.environ.get("TOKENHSI_RECORD_ROLLOUT_ENV_ID", "0"))
+        self.max_frames = int(os.environ.get("TOKENHSI_RECORD_ROLLOUT_MAX_FRAMES", "0"))
+        self.body_names = None
+        self.body_pos = []
+        self.body_quat_xyzw = []
+
+    def enabled(self):
+        return bool(self.path)
+
+    def capture(self, task):
+        if not self.enabled() or task is None:
+            return False
+        if self.body_names is None:
+            self.body_names = tuple(getattr(task, "_asset_body_names", []))
+            if not self.body_names:
+                self.body_names = tuple("body_{:03d}".format(i) for i in range(int(task.num_bodies)))
+        pos = task._rigid_body_pos[self.env_id].detach().cpu().numpy().copy()
+        quat = task._rigid_body_rot[self.env_id].detach().cpu().numpy().copy()
+        self.body_pos.append(pos)
+        self.body_quat_xyzw.append(quat)
+        return self.max_frames > 0 and len(self.body_pos) >= self.max_frames
+
+    def save(self):
+        if not self.enabled() or len(self.body_pos) == 0:
+            return
+        output_dir = os.path.dirname(self.path)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+        np.savez(
+            self.path,
+            body_names=np.array(self.body_names),
+            body_pos=np.stack(self.body_pos, axis=0).astype(np.float32),
+            body_quat_xyzw=np.stack(self.body_quat_xyzw, axis=0).astype(np.float32),
+            dt=np.array(1.0 / 30.0, dtype=np.float32),
+        )
+        print("saved policy rollout {} frames -> {}".format(len(self.body_pos), self.path))
+
 
 class CommonPlayer(players.PpoPlayerContinuous):
     def __init__(self, config):
@@ -51,6 +94,8 @@ class CommonPlayer(players.PpoPlayerContinuous):
         return
 
     def run(self):
+        recorder = RolloutRecorder()
+        record_task = getattr(getattr(self, "env", None), "task", None)
         n_games = self.games_num
         render = self.render_env
         n_game_life = self.n_game_life
@@ -103,6 +148,7 @@ class CommonPlayer(players.PpoPlayerContinuous):
                 steps += 1
   
                 self._post_step(info)
+                recording_complete = recorder.capture(record_task)
 
                 if render:
                     self.env.render(mode = 'human')
@@ -112,6 +158,10 @@ class CommonPlayer(players.PpoPlayerContinuous):
                 done_indices = all_done_indices[::self.num_agents]
                 done_count = len(done_indices)
                 games_played += done_count
+
+                if recording_complete:
+                    games_played = n_games
+                    break
 
                 if done_count > 0:
                     if self.is_rnn:
@@ -146,6 +196,7 @@ class CommonPlayer(players.PpoPlayerContinuous):
                 
                 done_indices = done_indices[:, 0]
 
+        recorder.save()
         print(sum_rewards)
         if print_game_res:
             print('av reward:', sum_rewards / games_played * n_game_life, 'av steps:', sum_steps / games_played * n_game_life, 'winrate:', sum_game_res / games_played * n_game_life)
@@ -197,8 +248,8 @@ class CommonPlayer(players.PpoPlayerContinuous):
         obs = self.env.reset(env_ids)
         return self.obs_to_torch(obs)
 
-    def _post_step(self, info):
-        return
+    def _post_step(self, info, done=None):
+        return False
 
     def _build_net_config(self):
         obs_shape = torch_ext.shape_whc_to_cwh(self.obs_shape)

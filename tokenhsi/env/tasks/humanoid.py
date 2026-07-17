@@ -28,6 +28,7 @@
 
 import numpy as np
 import os
+import xml.etree.ElementTree as ET
 import torch
 
 from isaacgym import gymtorch
@@ -38,11 +39,18 @@ from utils import torch_utils
 
 from env.tasks.base_task import BaseTask
 
+G1_DEX3_ASSET_FILES = {
+    "mjcf/g1_dex3.urdf",
+    "mjcf/g1_dex3_ori.urdf",
+    "mjcf/g1_mocap_29dof_with_hands.xml",
+}
+
 class Humanoid(BaseTask):
     def __init__(self, cfg, sim_params, physics_engine, device_type, device_id, headless):
         self.cfg = cfg
         self.sim_params = sim_params
         self.physics_engine = physics_engine
+        self._debug_isaac_build = os.environ.get("TOKENHSI_DEBUG_ISAAC", "0") == "1"
 
         self._pd_control = self.cfg["env"]["pdControl"]
         self.power_scale = self.cfg["env"]["powerScale"]
@@ -138,6 +146,11 @@ class Humanoid(BaseTask):
             
         return
 
+    def _debug_isaac(self, msg):
+        if self._debug_isaac_build:
+            print("[TokenHSI IsaacGym debug] {}".format(msg), flush=True)
+        return
+
     def get_obs_size(self):
         return self._num_obs
 
@@ -229,21 +242,17 @@ class Humanoid(BaseTask):
             self._num_actions = 29
             self._num_actions_joint = self._num_actions
             self._num_obs = 1 + 30 * (3 + 6 + 3 + 3) - 3
-        elif (asset_file == "mjcf/g1_mocap_29dof_with_hands.xml"):
-            self._dof_body_ids = [
-                1, 2, 3, 4, 5, 6,
-                8, 9, 10, 11, 12, 13,
-                15, 16, 17,
-                18, 19, 20, 21, 22, 23, 24,
-                25, 26, 27, 29, 30, 32, 33,
-                35, 36, 37, 38, 39, 40, 41,
-                42, 43, 44, 46, 47, 49, 50,
-            ]
+        elif (asset_file in G1_DEX3_ASSET_FILES):
+            body_names, body_parent_names, body_rest_pos, dof_body_ids = self._parse_g1_asset_body_info(asset_file)
+            self._asset_body_names = body_names
+            self._asset_body_parent_names = body_parent_names
+            self._asset_body_rest_pos = body_rest_pos
+            self._dof_body_ids = dof_body_ids
             self._dof_offsets = list(range(44))
             self._dof_obs_size = 43 * 6
             self._num_actions = 43
             self._num_actions_joint = self._num_actions
-            self._num_obs = 1 + 52 * (3 + 6 + 3 + 3) - 3
+            self._num_obs = 1 + len(body_names) * (3 + 6 + 3 + 3) - 3
 
         else:
             print("Unsupported character config file: {:s}".format(asset_file))
@@ -251,13 +260,86 @@ class Humanoid(BaseTask):
 
         return
 
+    def _parse_g1_asset_body_info(self, asset_file):
+        asset_root = self.cfg["env"]["asset"]["assetRoot"]
+        asset_path = os.path.join(os.getcwd(), asset_root, asset_file)
+        if asset_file.endswith(".urdf"):
+            return self._parse_urdf_body_info(asset_path)
+        if asset_file.endswith(".xml"):
+            return self._parse_mjcf_body_info(asset_path)
+        raise RuntimeError("Unsupported G1 asset extension: {}".format(asset_file))
+
+    def _parse_urdf_body_info(self, asset_path):
+        root = ET.parse(asset_path).getroot()
+        body_names = [link.attrib["name"] for link in root.findall("link")]
+        body_index = {name: idx for idx, name in enumerate(body_names)}
+        body_parent_names = {body_names[0]: None}
+        body_rest_pos = {body_names[0]: np.zeros(3, dtype=np.float32)}
+        dof_body_ids = []
+
+        for joint in root.findall("joint"):
+            parent = joint.find("parent")
+            child = joint.find("child")
+            if parent is None or child is None:
+                continue
+            parent_name = parent.attrib["link"]
+            child_name = child.attrib["link"]
+            body_parent_names[child_name] = parent_name
+            origin = joint.find("origin")
+            if origin is None:
+                origin_xyz = np.zeros(3, dtype=np.float32)
+            else:
+                origin_xyz = np.array([float(v) for v in origin.attrib.get("xyz", "0 0 0").split()], dtype=np.float32)
+            body_rest_pos[child_name] = body_rest_pos.get(parent_name, np.zeros(3, dtype=np.float32)) + origin_xyz
+            if joint.attrib.get("type") != "fixed":
+                dof_body_ids.append(body_index[child_name])
+
+        if len(dof_body_ids) != 43:
+            raise RuntimeError("{} has {} movable joints, expected 43".format(asset_path, len(dof_body_ids)))
+        return body_names, body_parent_names, body_rest_pos, dof_body_ids
+
+    def _parse_mjcf_body_info(self, asset_path):
+        root = ET.parse(asset_path).getroot()
+        worldbody = root.find("worldbody")
+        body_names = []
+        body_parent_names = {}
+        body_rest_pos = {}
+        dof_body_ids = []
+
+        def walk(body, parent_name, parent_pos):
+            body_id = len(body_names)
+            body_name = body.attrib["name"]
+            local_pos = np.array([float(v) for v in body.attrib.get("pos", "0 0 0").split()], dtype=np.float32)
+            curr_pos = parent_pos + local_pos
+            body_names.append(body_name)
+            body_parent_names[body_name] = parent_name
+            body_rest_pos[body_name] = curr_pos
+            for joint in body.findall("joint"):
+                if joint.attrib.get("name") is not None and joint.attrib.get("type") != "free":
+                    dof_body_ids.append(body_id)
+            for child in body.findall("body"):
+                walk(child, body_name, curr_pos)
+
+        for body in worldbody.findall("body"):
+            walk(body, None, np.zeros(3, dtype=np.float32))
+
+        if len(dof_body_ids) != 43:
+            raise RuntimeError("{} has {} movable joints, expected 43".format(asset_path, len(dof_body_ids)))
+        return body_names, body_parent_names, body_rest_pos, dof_body_ids
+
     def _build_termination_heights(self):
         head_term_height = 0.3
 
         termination_height = self.cfg["env"]["terminationHeight"]
         self._termination_heights = np.array([termination_height] * self.num_bodies)
 
-        head_id = self.gym.find_actor_rigid_body_handle(self.envs[0], self.humanoid_handles[0], "head")
+        head_id = -1
+        for head_body_name in ("head_link", "head"):
+            head_id = self.gym.find_actor_rigid_body_handle(self.envs[0], self.humanoid_handles[0], head_body_name)
+            if head_id != -1:
+                break
+        if head_id == -1:
+            raise RuntimeError("head body not found for termination height setup")
         self._termination_heights[head_id] = max(head_term_height, self._termination_heights[head_id])
         self._termination_heights = to_torch(self._termination_heights, device=self.device)
         return
@@ -277,11 +359,33 @@ class Humanoid(BaseTask):
         asset_options.angular_damping = 0.01
         asset_options.max_angular_velocity = 100.0
         asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
+        asset_options.replace_cylinder_with_capsule = False
         #asset_options.fix_base_link = True
+        self._debug_isaac("before humanoid load_asset root={} file={}".format(asset_root, asset_file))
         humanoid_asset = self.gym.load_asset(self.sim, asset_root, asset_file, asset_options)
+        self._debug_isaac("after humanoid load_asset")
 
+        self._debug_isaac("before get_asset_actuator_properties")
         actuator_props = self.gym.get_asset_actuator_properties(humanoid_asset)
         motor_efforts = [prop.motor_effort for prop in actuator_props]
+        self._debug_isaac("after get_asset_actuator_properties count={}".format(len(motor_efforts)))
+
+        self.torso_index = 0
+        self.num_bodies = self.gym.get_asset_rigid_body_count(humanoid_asset)
+        self.num_shapes = self.gym.get_asset_rigid_shape_count(humanoid_asset)
+        self.num_dof = self.gym.get_asset_dof_count(humanoid_asset)
+        self._debug_isaac("humanoid asset counts bodies={} shapes={} dof={}".format(self.num_bodies, self.num_shapes, self.num_dof))
+
+        if len(motor_efforts) == 0:
+            self._debug_isaac("actuator props empty; using URDF DOF effort limits")
+            dof_prop_for_effort = self.gym.get_asset_dof_properties(humanoid_asset)
+            motor_efforts = dof_prop_for_effort['effort'].tolist()
+            self._debug_isaac("after get_asset_dof_properties effort count={}".format(len(motor_efforts)))
+
+        if len(motor_efforts) != self.num_dof:
+            raise RuntimeError(
+                "motor effort count {} does not match asset DOF count {}".format(len(motor_efforts), self.num_dof)
+            )
         
         # create force sensors at the contact bodies
         contact_bodies = self.cfg["env"].get("contactBodies", ["right_foot", "left_foot"])
@@ -289,16 +393,13 @@ class Humanoid(BaseTask):
         left_foot_idx = self.gym.find_asset_rigid_body_index(humanoid_asset, contact_bodies[1])
         sensor_pose = gymapi.Transform()
 
+        self._debug_isaac("before create foot force sensors right={} left={}".format(right_foot_idx, left_foot_idx))
         self.gym.create_asset_force_sensor(humanoid_asset, right_foot_idx, sensor_pose)
         self.gym.create_asset_force_sensor(humanoid_asset, left_foot_idx, sensor_pose)
+        self._debug_isaac("after create foot force sensors")
 
         self.max_motor_effort = max(motor_efforts)
         self.motor_efforts = to_torch(motor_efforts, device=self.device)
-
-        self.torso_index = 0
-        self.num_bodies = self.gym.get_asset_rigid_body_count(humanoid_asset)
-        self.num_shapes = self.gym.get_asset_rigid_shape_count(humanoid_asset)
-        self.num_dof = self.gym.get_asset_dof_count(humanoid_asset)
 
         self.humanoid_handles = []
         self.envs = []
@@ -307,11 +408,16 @@ class Humanoid(BaseTask):
         
         for i in range(self.num_envs):
             # create env instance
+            self._debug_isaac("before create_env {}".format(i))
             env_ptr = self.gym.create_env(self.sim, lower, upper, num_per_row)
+            self._debug_isaac("after create_env {} before build_env".format(i))
             self._build_env(i, env_ptr, humanoid_asset)
+            self._debug_isaac("after build_env {}".format(i))
             self.envs.append(env_ptr)
 
+        self._debug_isaac("before get_actor_dof_properties")
         dof_prop = self.gym.get_actor_dof_properties(self.envs[0], self.humanoid_handles[0])
+        self._debug_isaac("after get_actor_dof_properties")
         for j in range(self.num_dof):
             if dof_prop['lower'][j] > dof_prop['upper'][j]:
                 self.dof_limits_lower.append(dof_prop['upper'][j])
@@ -341,7 +447,7 @@ class Humanoid(BaseTask):
             self._char_h = 0.92 # perfect number
         elif (asset_file == "mjcf/phys_humanoid_v3.xml") or (asset_file == "mjcf/phys_humanoid_v3_box_foot.xml"):
             self._char_h = 0.94
-        elif (asset_file == "mjcf/g1.xml") or (asset_file == "mjcf/g1_mocap_29dof_with_hands.xml"):
+        elif (asset_file == "mjcf/g1.xml") or (asset_file in G1_DEX3_ASSET_FILES):
             self._char_h = 0.793
         else:
             print("Unsupported character config file: {:s}".format(asset_file))

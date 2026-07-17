@@ -41,6 +41,7 @@ env:
 
   task: ["traj", "sit", "carry", "climb"]
   taskInitProb: [1.0, 0.0, 0.0, 0.0]
+  loadInactiveTaskAssets: False
 
   # IET: Interaction Early Termination
   enableIET: True
@@ -70,7 +71,7 @@ env:
   
   sit:
     # object
-    objDatasetDir: "dataset_g1_all/SAMP/sit"
+    objDatasetDir: "dataset_sit/objects"
     objCategories: 
       - "StraightChair_Normal"
 
@@ -94,11 +95,9 @@ env:
 
   climb:
     # object
-    objDatasetDir: "dataset_g1_all/AMASS/climb"
+    objDatasetDir: "dataset_amass_climb/objects"
     objCategories: 
       - "Box"
-      - "Cabinet"
-      - "Table_Square"
     
     climb_vel_penalty: True
     climb_vel_pen_coeff: 1.0
@@ -171,7 +170,7 @@ env:
 
   asset:
     assetRoot: "tokenhsi/data/assets"
-    assetFileName: "mjcf/g1_mocap_29dof_with_hands.xml"
+    assetFileName: "mjcf/g1_dex3_ori.urdf"
 
   plane:
     staticFriction: 1.0

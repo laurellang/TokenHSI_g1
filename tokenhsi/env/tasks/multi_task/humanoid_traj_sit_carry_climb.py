@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import os
+import pickle
 from enum import Enum
 import numpy as np
 import torch
@@ -36,9 +37,10 @@ import json
 from isaacgym import gymapi
 from isaacgym import gymtorch
 
-from env.tasks.humanoid import Humanoid, dof_to_obs
+from env.tasks.humanoid import G1_DEX3_ASSET_FILES, Humanoid, dof_to_obs
 from utils import gym_util
 from utils.motion_lib import MotionLib
+from utils.body_schema import build_asset_to_motion_body_mapping, map_motion_body_state_to_asset
 from isaacgym.torch_utils import *
 
 from utils import torch_utils
@@ -653,8 +655,13 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             self._sit_marker_handles = []
             self._climb_marker_handles = []
             self._load_marker_asset()
+
+        load_sit_mesh_assets = self._should_load_task_mesh_assets("sit")
+        load_climb_mesh_assets = self._should_load_task_mesh_assets("climb")
+        print("load task mesh assets: sit={}, climb={}".format(load_sit_mesh_assets, load_climb_mesh_assets))
         
         # load objects used in the sit task
+        self._debug_isaac("before init sit ObjectLib")
         self._sit_obj_lib = ObjectLib(
             mode=self._mode,
             dataset_root=os.path.join(os.path.dirname(self.cfg['env']['motion_file']), self.cfg["env"]["sit"]["objDatasetDir"]),
@@ -662,17 +669,29 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             num_envs=self.num_envs,
             device=self.device,
         )
+        self._debug_isaac("after init sit ObjectLib objects={}".format(len(self._sit_obj_lib._obj_urdfs)))
 
         # load physical assets
         self._sit_object_handles = []
-        self._sit_object_assets = self._load_object_asset(self._sit_obj_lib._obj_urdfs)
+        if load_sit_mesh_assets:
+            self._debug_isaac("before load sit mesh assets")
+            self._sit_object_assets = self._load_object_asset(self._sit_obj_lib._obj_urdfs)
+            self._debug_isaac("after load sit mesh assets")
+        else:
+            self._debug_isaac("before load sit proxy assets")
+            self._sit_object_assets = self._load_inactive_object_proxy_asset(self._sit_obj_lib._obj_urdfs)
+            self._debug_isaac("after load sit proxy assets")
 
         # load boxes used in the carry task
+        self._debug_isaac("before init BoxLib")
         self._box_lib = BoxLib(self._mode, self.cfg["env"]["carry"]["box"], self.num_envs, self.device)
+        self._debug_isaac("after init BoxLib")
 
         # load physical assets
         self._box_handles = []
+        self._debug_isaac("before load carry box assets")
         self._box_assets = self._load_box_asset(self._box_lib._box_size)
+        self._debug_isaac("after load carry box assets count={}".format(len(self._box_assets)))
 
         if self._carry_reset_random_height:
             self._platform_handles = []
@@ -680,6 +699,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             self._load_platform_asset()
 
         # load objects used in the climb task
+        self._debug_isaac("before init climb ObjectLib")
         self._climb_obj_lib = ObjectLib(
             mode=self._mode,
             dataset_root=os.path.join(os.path.dirname(self.cfg['env']['motion_file']), self.cfg["env"]["climb"]["objDatasetDir"]),
@@ -687,13 +707,36 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             num_envs=self.num_envs,
             device=self.device,
         )
+        self._debug_isaac("after init climb ObjectLib objects={}".format(len(self._climb_obj_lib._obj_urdfs)))
 
         # load physical assets
         self._climb_object_handles = []
-        self._climb_object_assets = self._load_object_asset(self._climb_obj_lib._obj_urdfs)
+        if load_climb_mesh_assets:
+            self._debug_isaac("before load climb mesh assets")
+            self._climb_object_assets = self._load_object_asset(self._climb_obj_lib._obj_urdfs)
+            self._debug_isaac("after load climb mesh assets")
+        else:
+            self._debug_isaac("before load climb proxy assets")
+            self._climb_object_assets = self._load_inactive_object_proxy_asset(self._climb_obj_lib._obj_urdfs)
+            self._debug_isaac("after load climb proxy assets")
 
+        self._debug_isaac("before super _create_envs")
         super()._create_envs(num_envs, spacing, num_per_row)
+        self._debug_isaac("after super _create_envs")
         return
+
+    def _should_load_task_mesh_assets(self, task_name):
+        if self.cfg["env"].get("loadInactiveTaskAssets", True):
+            return True
+
+        args = self.cfg.get("args", None)
+        if getattr(args, "eval", False):
+            return getattr(args, "eval_task", "") == task_name
+
+        task_names = self.cfg["env"]["task"]
+        task_init_prob = self.cfg["env"]["taskInitProb"]
+        task_idx = task_names.index(task_name)
+        return task_init_prob[task_idx] > 0.0
     
     def _load_marker_asset(self):
         asset_root = "tokenhsi/data/assets/mjcf/"
@@ -728,6 +771,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
     def _load_box_asset(self, box_sizes):
         box_assets = []
         for i in range(self.num_envs):
+            self._debug_isaac("before create carry box asset {}".format(i))
             asset_options = gymapi.AssetOptions()
             asset_options.angular_damping = 0.01
             asset_options.linear_damping = 0.01
@@ -735,6 +779,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             asset_options.density = 100.0
             asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
             box_assets.append(self.gym.create_box(self.sim, box_sizes[i, 0], box_sizes[i, 1], box_sizes[i, 2], asset_options))
+            self._debug_isaac("after create carry box asset {}".format(i))
         return box_assets
     
     def _load_object_asset(self, object_urdfs):
@@ -761,20 +806,43 @@ class HumanoidTrajSitCarryClimb(Humanoid):
         asset_root = "./"
         object_assets = []
         for urdf in object_urdfs:
+            self._debug_isaac("before load object asset {}".format(urdf))
             object_assets.append(self.gym.load_asset(self.sim, asset_root, urdf, asset_options))
+            self._debug_isaac("after load object asset {}".format(urdf))
 
         return object_assets
 
+    def _load_inactive_object_proxy_asset(self, object_urdfs):
+        asset_options = gymapi.AssetOptions()
+        asset_options.angular_damping = 0.01
+        asset_options.linear_damping = 0.01
+        asset_options.max_angular_velocity = 100.0
+        asset_options.fix_base_link = True
+        asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
+
+        self._debug_isaac("before create inactive object proxy asset")
+        proxy_asset = self.gym.create_box(self.sim, 0.05, 0.05, 0.05, asset_options)
+        self._debug_isaac("after create inactive object proxy asset reused_count={}".format(len(object_urdfs)))
+        return [proxy_asset for _ in object_urdfs]
+
     def _build_env(self, env_id, env_ptr, humanoid_asset):
+        self._debug_isaac("env {} before build humanoid".format(env_id))
         super()._build_env(env_id, env_ptr, humanoid_asset)
+        self._debug_isaac("env {} after build humanoid".format(env_id))
 
+        self._debug_isaac("env {} before build sit object".format(env_id))
         self._build_sit_object(env_id, env_ptr)
+        self._debug_isaac("env {} after build sit object".format(env_id))
 
+        self._debug_isaac("env {} before build box".format(env_id))
         self._build_box(env_id, env_ptr)
+        self._debug_isaac("env {} after build box".format(env_id))
         if self._carry_reset_random_height:
             self._build_platforms(env_id, env_ptr)
         
+        self._debug_isaac("env {} before build climb object".format(env_id))
         self._build_climb_object(env_id, env_ptr)
+        self._debug_isaac("env {} after build climb object".format(env_id))
 
         if (not self.headless):
             self._build_marker(env_id, env_ptr)
@@ -1370,7 +1438,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
         elif (
             (asset_file == "mjcf/g1.xml")
             or (asset_file == "mjcf/g1_braincohand.xml")
-            or (asset_file == "mjcf/g1_mocap_29dof_with_hands.xml")
+            or (asset_file in G1_DEX3_ASSET_FILES)
         ):
             self._num_amp_obs_per_step = 13 + self._dof_obs_size + self._num_actions + 3 * num_key_bodies # [root_h, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, key_body_pos]
         else:
@@ -1392,18 +1460,74 @@ class HumanoidTrajSitCarryClimb(Humanoid):
                 motion_config = yaml.load(f, Loader=yaml.SafeLoader)
 
             self._skill_categories = list(motion_config['motions'].keys()) # all skill names stored in the yaml file
+            self._motion_body_names = self._load_motion_body_names(motion_file, motion_config)
+            motion_key_body_ids = self._build_motion_key_body_ids(self._motion_body_names)
+            self._asset_to_motion_body_ids, self._asset_to_motion_body_pos_offsets = self._build_asset_to_motion_body_ids(self._motion_body_names)
             self._motion_lib = {}
             for skill in self._skill_categories:
                 self._motion_lib[skill] = MotionLib(motion_file=motion_file,
                                                     skill=skill,
                                                     dof_body_ids=self._dof_body_ids,
                                                     dof_offsets=self._dof_offsets,
-                                                    key_body_ids=self._key_body_ids.cpu().numpy(), 
+                                                    key_body_ids=motion_key_body_ids, 
                                                     device=self.device)
         else:
             raise NotImplementedError
 
         return
+
+    def _load_motion_body_names(self, motion_file, motion_config):
+        dir_name = os.path.dirname(motion_file)
+        for entries in motion_config["motions"].values():
+            for entry in entries:
+                path = os.path.join(os.getcwd(), dir_name, entry["file"])
+                with open(path, "rb") as f:
+                    data = pickle.load(f)
+                body_names = data.get("link_body_list")
+                if body_names is not None:
+                    return list(body_names)
+        return []
+
+    def _build_motion_key_body_ids(self, motion_body_names):
+        if len(motion_body_names) == 0:
+            return self._key_body_ids.cpu().numpy()
+
+        motion_body_index = {name: idx for idx, name in enumerate(motion_body_names)}
+        key_body_ids = []
+        for body_name in self.cfg["env"]["keyBodies"]:
+            if body_name not in motion_body_index:
+                raise RuntimeError("key body {} missing in motion body schema".format(body_name))
+            key_body_ids.append(motion_body_index[body_name])
+        return np.array(key_body_ids, dtype=np.int64)
+
+    def _build_asset_to_motion_body_ids(self, motion_body_names):
+        asset_body_names = getattr(self, "_asset_body_names", None)
+        if asset_body_names is None or len(motion_body_names) == 0:
+            return None, None
+
+        asset_body_parent_names = getattr(self, "_asset_body_parent_names", {})
+        asset_body_rest_pos = getattr(self, "_asset_body_rest_pos", {})
+        mapped_ids, pos_offsets = build_asset_to_motion_body_mapping(
+            asset_body_names,
+            asset_body_parent_names,
+            motion_body_names,
+            asset_body_rest_pos,
+        )
+        return mapped_ids.to(device=self.device), pos_offsets.to(device=self.device)
+
+    def _map_motion_body_state_to_asset(self, body_state):
+        body_ids = getattr(self, "_asset_to_motion_body_ids", None)
+        if body_ids is None or body_state.shape[1] == self.num_bodies:
+            return body_state
+        if body_ids.shape[0] != self.num_bodies:
+            raise RuntimeError(
+                "asset-to-motion body map has {}, but IsaacGym asset has {} bodies".format(
+                    body_ids.shape[0],
+                    self.num_bodies,
+                )
+            )
+        pos_offsets = getattr(self, "_asset_to_motion_body_pos_offsets", None)
+        return map_motion_body_state_to_asset(body_state, body_ids, pos_offsets)
     
     def _reset_task_traj(self, env_ids):
         root_pos = self._humanoid_root_states[env_ids, 0:3]
@@ -1844,7 +1968,9 @@ class HumanoidTrajSitCarryClimb(Humanoid):
                 # update buffer for kinematic humanoid state
                 body_pos, body_rot, body_vel, body_ang_vel \
                     = curr_motion_lib.get_motion_state_max(curr_motion_ids, curr_motion_times)
-                self._kinematic_humanoid_rigid_body_states[curr_env_ids] = torch.cat((body_pos, body_rot, body_vel, body_ang_vel), dim=-1)
+                body_state = torch.cat((body_pos, body_rot, body_vel, body_ang_vel), dim=-1)
+                body_state = self._map_motion_body_state_to_asset(body_state)
+                self._kinematic_humanoid_rigid_body_states[curr_env_ids] = body_state
 
                 self._every_env_init_dof_pos[curr_env_ids] = dof_pos # for "enableTrackInitState"
 

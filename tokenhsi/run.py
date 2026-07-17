@@ -29,6 +29,7 @@
 import os
 
 from utils.config import set_np_formatting, set_seed, get_args, parse_sim_params, load_cfg
+from utils.distributed import HorovodRuntime, apply_horovod_runtime, ensure_horovod_initialized
 from utils.parse_task import parse_task
 
 from rl_games.algos_torch import players
@@ -63,17 +64,24 @@ def create_rlgpu_env(**kwargs):
     if use_horovod:
         import horovod.torch as hvd
 
-        rank = hvd.rank()
-        print("Horovod rank: ", rank)
-
-        cfg_train['params']['seed'] = cfg_train['params']['seed'] + rank
-
-        args.device = 'cuda'
-        args.device_id = rank
-        args.rl_device = 'cuda:' + str(rank)
-
-        cfg['rank'] = rank
-        cfg['rl_device'] = 'cuda:' + str(rank)
+        ensure_horovod_initialized(hvd)
+        runtime = HorovodRuntime.from_horovod(
+            hvd,
+            cfg_train['params']['config'].get('base_seed', cfg_train['params']['seed']),
+            cfg['env']['numEnvs'],
+        )
+        apply_horovod_runtime(runtime, args, cfg, cfg_train)
+        if torch.cuda.is_available():
+            torch.cuda.set_device(args.device_id)
+        print(
+            "Horovod rank: {} local_rank: {} world_size: {} num_envs_per_rank: {} global_num_envs: {}".format(
+                runtime.rank,
+                runtime.local_rank,
+                runtime.world_size,
+                runtime.num_envs_per_rank,
+                runtime.global_num_envs,
+            )
+        )
 
     sim_params = parse_sim_params(args, cfg, cfg_train)
     task, env = parse_task(args, cfg, cfg_train, sim_params)
@@ -201,7 +209,15 @@ def main():
     args = get_args()
     cfg, cfg_train, logdir = load_cfg(args)
 
+    if args.horovod:
+        import horovod.torch as hvd
+
+        ensure_horovod_initialized(hvd)
+        if cfg_train['params'].get("seed", -1) == -1:
+            cfg_train['params']['seed'] = cfg_train['params']['config']['seed'] = 42
+
     cfg_train['params']['seed'] = cfg_train['params']['config']['seed'] = set_seed(cfg_train['params'].get("seed", -1), cfg_train['params'].get("torch_deterministic", False))
+    cfg_train['params']['config']['base_seed'] = cfg_train['params']['seed']
 
     if args.horovod:
         cfg_train['params']['config']['multi_gpu'] = args.horovod

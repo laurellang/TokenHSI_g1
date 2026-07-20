@@ -299,6 +299,33 @@ def test_humanoid_loader_falls_back_to_urdf_dof_effort_when_actuators_are_missin
     assert "len(motor_efforts) != self.num_dof" in text
 
 
+def test_active_g1_cfg_declares_unitree_motor_control_contract():
+    env = load_env_cfg()
+    control = env["g1Control"]
+
+    assert control["useUnitreeMotorConstants"] is True
+    assert control["useDefaultJointAngles"] is True
+    assert control["actionScaleFactor"] == pytest.approx(0.25)
+    assert control["terminationGraceSteps"] >= 10
+    assert control["handKp"] > 0.0
+    assert control["handKd"] > 0.0
+    assert control["handActionScale"] > 0.0
+
+
+def test_humanoid_loader_applies_g1_motor_gains_and_default_action_offset():
+    humanoid_py = ROOT / "tokenhsi/env/tasks/humanoid.py"
+    text = humanoid_py.read_text()
+
+    assert "_apply_g1_pd_control_props" in text
+    assert "_build_g1_motor_pd_tables" in text
+    assert 'dof_prop["stiffness"]' in text
+    assert 'dof_prop["damping"]' in text
+    assert 'dof_prop["armature"]' in text
+    assert "_build_g1_default_dof_pos" in text
+    assert "useDefaultJointAngles" in text
+
+
+
 def test_skeleton_motion_import_does_not_warn_when_fbx_is_missing():
     result = subprocess.run(
         [

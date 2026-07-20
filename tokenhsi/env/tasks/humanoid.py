@@ -26,6 +26,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import math
 import numpy as np
 import os
 import xml.etree.ElementTree as ET
@@ -54,6 +55,7 @@ class Humanoid(BaseTask):
 
         self._pd_control = self.cfg["env"]["pdControl"]
         self.power_scale = self.cfg["env"]["powerScale"]
+        self._g1_control_cfg = self.cfg["env"].get("g1Control", {})
 
         self.debug_viz = self.cfg["env"]["enableDebugVis"]
         self.plane_static_friction = self.cfg["env"]["plane"]["staticFriction"]
@@ -375,6 +377,7 @@ class Humanoid(BaseTask):
         self._asset_body_names = list(self.gym.get_asset_rigid_body_names(humanoid_asset))
         self.num_shapes = self.gym.get_asset_rigid_shape_count(humanoid_asset)
         self.num_dof = self.gym.get_asset_dof_count(humanoid_asset)
+        self._asset_dof_names = list(self.gym.get_asset_dof_names(humanoid_asset))
         self._debug_isaac("humanoid asset counts bodies={} shapes={} dof={}".format(self.num_bodies, self.num_shapes, self.num_dof))
 
         if len(motor_efforts) == 0:
@@ -466,13 +469,152 @@ class Humanoid(BaseTask):
         if (self._pd_control):
             dof_prop = self.gym.get_asset_dof_properties(humanoid_asset)
             dof_prop["driveMode"] = gymapi.DOF_MODE_POS
+            if self._is_g1_asset() and self._g1_control_cfg.get("useUnitreeMotorConstants", False):
+                dof_prop = self._apply_g1_pd_control_props(dof_prop, self._asset_dof_names)
             self.gym.set_actor_dof_properties(env_ptr, humanoid_handle, dof_prop)
 
         self.humanoid_handles.append(humanoid_handle)
 
         return
 
+    def _is_g1_asset(self):
+        asset_file = self.cfg["env"]["asset"]["assetFileName"]
+        return (asset_file == "mjcf/g1.xml") or (asset_file in G1_DEX3_ASSET_FILES)
+
+    def _build_g1_motor_pd_tables(self, dof_names):
+        # Constants copied from the Unitree/Sonic G1 motor model.
+        armature_5020 = 0.003609725
+        armature_7520_14 = 0.010177520
+        armature_7520_22 = 0.025101925
+        armature_4010 = 0.00425
+        natural_freq = 10.0 * 2.0 * math.pi
+        damping_ratio = 2.0
+
+        stiffness_5020 = armature_5020 * natural_freq ** 2
+        stiffness_7520_14 = armature_7520_14 * natural_freq ** 2
+        stiffness_7520_22 = armature_7520_22 * natural_freq ** 2
+        stiffness_4010 = armature_4010 * natural_freq ** 2
+
+        damping_5020 = 2.0 * damping_ratio * armature_5020 * natural_freq
+        damping_7520_14 = 2.0 * damping_ratio * armature_7520_14 * natural_freq
+        damping_7520_22 = 2.0 * damping_ratio * armature_7520_22 * natural_freq
+        damping_4010 = 2.0 * damping_ratio * armature_4010 * natural_freq
+
+        action_scale_factor = float(self._g1_control_cfg.get("actionScaleFactor", 0.25))
+        hand_kp = float(self._g1_control_cfg.get("handKp", stiffness_4010))
+        hand_kd = float(self._g1_control_cfg.get("handKd", damping_4010))
+        hand_armature = float(self._g1_control_cfg.get("handArmature", armature_4010))
+        hand_action_scale = float(self._g1_control_cfg.get("handActionScale", 0.03))
+
+        main_rows = {
+            "left_hip_pitch_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "left_hip_roll_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "left_hip_yaw_joint": (stiffness_7520_14, damping_7520_14, action_scale_factor * 88.0 / stiffness_7520_14),
+            "left_knee_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "left_ankle_pitch_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_ankle_roll_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_hip_pitch_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "right_hip_roll_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "right_hip_yaw_joint": (stiffness_7520_14, damping_7520_14, action_scale_factor * 88.0 / stiffness_7520_14),
+            "right_knee_joint": (stiffness_7520_22, damping_7520_22, action_scale_factor * 139.0 / stiffness_7520_22),
+            "right_ankle_pitch_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_ankle_roll_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "waist_yaw_joint": (stiffness_7520_14, damping_7520_14, action_scale_factor * 88.0 / stiffness_7520_14),
+            "waist_roll_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "waist_pitch_joint": (2.0 * stiffness_5020, 2.0 * damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_shoulder_pitch_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_shoulder_roll_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_shoulder_yaw_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_elbow_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_wrist_roll_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "left_wrist_pitch_joint": (stiffness_4010, damping_4010, action_scale_factor * 5.0 / stiffness_4010),
+            "left_wrist_yaw_joint": (stiffness_4010, damping_4010, action_scale_factor * 5.0 / stiffness_4010),
+            "right_shoulder_pitch_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_shoulder_roll_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_shoulder_yaw_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_elbow_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_wrist_roll_joint": (stiffness_5020, damping_5020, action_scale_factor * 25.0 / stiffness_5020),
+            "right_wrist_pitch_joint": (stiffness_4010, damping_4010, action_scale_factor * 5.0 / stiffness_4010),
+            "right_wrist_yaw_joint": (stiffness_4010, damping_4010, action_scale_factor * 5.0 / stiffness_4010),
+        }
+
+        kp = np.zeros(len(dof_names), dtype=np.float32)
+        kd = np.zeros(len(dof_names), dtype=np.float32)
+        armature = np.zeros(len(dof_names), dtype=np.float32)
+        action_scale = np.zeros(len(dof_names), dtype=np.float32)
+        for i, name in enumerate(dof_names):
+            if name in main_rows:
+                kp_i, kd_i, scale_i = main_rows[name]
+                kp[i] = kp_i
+                kd[i] = kd_i
+                armature[i] = kp_i / (natural_freq ** 2)
+                action_scale[i] = scale_i
+            elif "hand" in name:
+                kp[i] = hand_kp
+                kd[i] = hand_kd
+                armature[i] = hand_armature
+                action_scale[i] = hand_action_scale
+            else:
+                raise RuntimeError("No G1 motor constants for DOF {}".format(name))
+        return kp, kd, armature, action_scale
+
+    def _build_g1_default_dof_pos(self, dof_names):
+        default_rows = {
+            "left_hip_pitch_joint": -0.312,
+            "left_hip_roll_joint": 0.0,
+            "left_hip_yaw_joint": 0.0,
+            "left_knee_joint": 0.669,
+            "left_ankle_pitch_joint": -0.363,
+            "left_ankle_roll_joint": 0.0,
+            "right_hip_pitch_joint": -0.312,
+            "right_hip_roll_joint": 0.0,
+            "right_hip_yaw_joint": 0.0,
+            "right_knee_joint": 0.669,
+            "right_ankle_pitch_joint": -0.363,
+            "right_ankle_roll_joint": 0.0,
+            "waist_yaw_joint": 0.0,
+            "waist_roll_joint": 0.0,
+            "waist_pitch_joint": 0.0,
+            "left_shoulder_pitch_joint": 0.2,
+            "left_shoulder_roll_joint": 0.2,
+            "left_shoulder_yaw_joint": 0.0,
+            "left_elbow_joint": 0.6,
+            "left_wrist_roll_joint": 0.0,
+            "left_wrist_pitch_joint": 0.0,
+            "left_wrist_yaw_joint": 0.0,
+            "right_shoulder_pitch_joint": 0.2,
+            "right_shoulder_roll_joint": -0.2,
+            "right_shoulder_yaw_joint": 0.0,
+            "right_elbow_joint": 0.6,
+            "right_wrist_roll_joint": 0.0,
+            "right_wrist_pitch_joint": 0.0,
+            "right_wrist_yaw_joint": 0.0,
+        }
+        default = np.zeros(len(dof_names), dtype=np.float32)
+        for i, name in enumerate(dof_names):
+            default[i] = default_rows.get(name, 0.0)
+        return default
+
+    def _apply_g1_pd_control_props(self, dof_prop, dof_names):
+        kp, kd, armature, _ = self._build_g1_motor_pd_tables(dof_names)
+        dof_prop["stiffness"] = kp
+        dof_prop["damping"] = kd
+        dof_prop["armature"] = armature
+        if "friction" in dof_prop.dtype.names:
+            dof_prop["friction"] = float(self._g1_control_cfg.get("jointFriction", 0.0))
+        return dof_prop
+
     def _build_pd_action_offset_scale(self):
+        if self._is_g1_asset() and self._g1_control_cfg.get("useUnitreeMotorConstants", False):
+            _, _, _, action_scale = self._build_g1_motor_pd_tables(self._asset_dof_names)
+            if self._g1_control_cfg.get("useDefaultJointAngles", False):
+                offset = self._build_g1_default_dof_pos(self._asset_dof_names)
+            else:
+                offset = np.zeros_like(action_scale)
+            self._pd_action_offset = to_torch(offset, device=self.device)
+            self._pd_action_scale = to_torch(action_scale, device=self.device)
+            return
+
         num_joints = len(self._dof_offsets) - 1
         
         lim_low = self.dof_limits_lower.cpu().numpy()
@@ -493,18 +635,10 @@ class Humanoid(BaseTask):
 
                 lim_low[dof_offset:(dof_offset + dof_size)] = -curr_scale
                 lim_high[dof_offset:(dof_offset + dof_size)] = curr_scale
-                
-                #lim_low[dof_offset:(dof_offset + dof_size)] = -np.pi
-                #lim_high[dof_offset:(dof_offset + dof_size)] = np.pi
-
-
             elif (dof_size == 1):
                 curr_low = lim_low[dof_offset]
                 curr_high = lim_high[dof_offset]
                 curr_mid = 0.5 * (curr_high + curr_low)
-                
-                # extend the action range to be a bit beyond the joint limits so that the motors
-                # don't lose their strength as they approach the joint limits
                 curr_scale = 0.7 * (curr_high - curr_low)
                 curr_low = curr_mid - curr_scale
                 curr_high = curr_mid + curr_scale
@@ -651,6 +785,7 @@ class Humanoid(BaseTask):
 
     def _action_to_pd_targets(self, action):
         pd_tar = self._pd_action_offset + self._pd_action_scale * action
+        pd_tar = torch.max(torch.min(pd_tar, self.dof_limits_upper.unsqueeze(0)), self.dof_limits_lower.unsqueeze(0))
         return pd_tar
 
     def _init_camera(self):

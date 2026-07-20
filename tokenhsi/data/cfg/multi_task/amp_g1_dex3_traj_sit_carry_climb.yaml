@@ -27,6 +27,17 @@ env:
   enableSelfCollisionDetection: True
   enableTrackInitState: False
 
+  g1Control:
+    useUnitreeMotorConstants: True
+    useDefaultJointAngles: True
+    actionScaleFactor: 0.25
+    terminationGraceSteps: 20
+    handKp: 16.778
+    handKd: 1.068
+    handArmature: 0.00425
+    handActionScale: 0.03
+    jointFriction: 0.0
+
   mode: "train"
   
   skill: ["loco", "loco_sit", "sit", "loco_carry", "pickUp", "carryWith", "putDown", "omomo", "loco_climb", "climb", "climbNoRSI"]

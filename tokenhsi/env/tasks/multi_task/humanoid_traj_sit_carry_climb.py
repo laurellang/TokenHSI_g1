@@ -258,6 +258,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
 
         self._power_reward = cfg["env"]["power_reward"]
         self._power_coefficient = cfg["env"]["power_coefficient"]
+        self._termination_grace_steps = int(cfg["env"].get("g1Control", {}).get("terminationGraceSteps", 2))
 
         self._reset_default_env_ids = []
         self._reset_ref_env_ids = {} # to enable multi-skill reference init, use dict instead of list
@@ -2167,7 +2168,8 @@ class HumanoidTrajSitCarryClimb(Humanoid):
                                                            self.max_episode_length, self._fail_dist, traj_env_mask, 
                                                            carry_env_mask, self.max_episode_length_short,
                                                            self._enable_IET, self._max_IET_steps, self._IET_step_buf,
-                                                           self._enable_early_termination, self._termination_heights)
+                                                           self._enable_early_termination, self._termination_heights,
+                                                           self._termination_grace_steps)
         return
 
 
@@ -2188,8 +2190,8 @@ def compute_humanoid_reset(reset_buf, progress_buf, contact_buf, contact_body_id
                            tar_pos, max_episode_length, fail_dist, traj_env_mask, 
                            carry_env_mask, max_episode_length_short,
                            enable_IET, max_IET_steps, IET_step_buf,
-                           enable_early_termination, termination_heights):
-    # type: (Tensor, Tensor, Tensor, Tensor, Tensor, Tensor, float, float, Tensor, Tensor, float, bool, int, Tensor, bool, Tensor) -> Tuple[Tensor, Tensor]
+                           enable_early_termination, termination_heights, termination_grace_steps):
+    # type: (Tensor, Tensor, Tensor, Tensor, Tensor, Tensor, float, float, Tensor, Tensor, float, bool, int, Tensor, bool, Tensor, int) -> Tuple[Tensor, Tensor]
     terminated = torch.zeros_like(reset_buf)
     IET_triggered = torch.zeros_like(reset_buf)
 
@@ -2205,9 +2207,8 @@ def compute_humanoid_reset(reset_buf, progress_buf, contact_buf, contact_body_id
         fall_height = torch.any(fall_height, dim=-1)
 
         has_fallen = torch.logical_and(fall_contact, fall_height)
-        # first timestep can sometimes still have nonzero contact forces
-        # so only check after first couple of steps
-        has_fallen *= (progress_buf > 1)
+        # Let the G1 PD controller settle before early fall termination is active.
+        has_fallen *= (progress_buf > termination_grace_steps)
 
         root_pos = rigid_body_pos[..., 0, :]
         tar_delta = tar_pos[..., 0:2] - root_pos[..., 0:2]

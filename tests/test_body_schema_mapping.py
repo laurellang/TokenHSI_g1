@@ -1,6 +1,10 @@
+from pathlib import Path
+
 import torch
 
 from tokenhsi.utils.body_schema import build_asset_to_motion_body_mapping, map_motion_body_state_to_asset
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_missing_fixed_asset_bodies_keep_parent_motion_plus_rest_offset():
@@ -50,3 +54,10 @@ def test_missing_fixed_asset_bodies_keep_parent_motion_plus_rest_offset():
     assert torch.allclose(asset_state[0, 2, 0:3], torch.tensor([1.0039635, 2.0, 2.956]))
     assert torch.allclose(asset_state[0, 4, 0:3], torch.tensor([4.0415, 5.003, 6.0]))
     assert torch.allclose(asset_state[0, 4, 7:10], torch.tensor([0.1, 0.2, 0.3]))
+
+
+def test_humanoid_motion_body_mapping_does_not_skip_when_body_counts_match():
+    task_source = ROOT / "tokenhsi/env/tasks/multi_task/humanoid_traj_sit_carry_climb.py"
+    text = task_source.read_text()
+
+    assert "or body_state.shape[1] == self.num_bodies" not in text

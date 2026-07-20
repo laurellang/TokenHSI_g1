@@ -372,6 +372,7 @@ class Humanoid(BaseTask):
 
         self.torso_index = 0
         self.num_bodies = self.gym.get_asset_rigid_body_count(humanoid_asset)
+        self._asset_body_names = list(self.gym.get_asset_rigid_body_names(humanoid_asset))
         self.num_shapes = self.gym.get_asset_rigid_shape_count(humanoid_asset)
         self.num_dof = self.gym.get_asset_dof_count(humanoid_asset)
         self._debug_isaac("humanoid asset counts bodies={} shapes={} dof={}".format(self.num_bodies, self.num_shapes, self.num_dof))

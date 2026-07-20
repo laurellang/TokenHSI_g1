@@ -42,6 +42,7 @@ from utils import gym_util
 from utils.motion_lib import MotionLib
 from utils.body_schema import build_asset_to_motion_body_mapping, map_motion_body_state_to_asset
 from isaacgym.torch_utils import *
+from env.tasks.multi_task.g1_loco_reward import compute_g1_loco_reward
 
 from utils import torch_utils
 from utils import traj_generator
@@ -325,6 +326,8 @@ class HumanoidTrajSitCarryClimb(Humanoid):
         self.register_task_climb_post_init(cfg)
         self.post_process_disc_dataset_collection(cfg)
 
+        self._prev_actions_for_reward = torch.zeros((self.num_envs, self.num_actions), device=self.device, dtype=torch.float)
+
         # tensors for enableTrackInitState
         self._every_env_init_dof_pos = torch.zeros((self.num_envs, self.num_dof), device=self.device, dtype=torch.float)
 
@@ -345,6 +348,25 @@ class HumanoidTrajSitCarryClimb(Humanoid):
         self._sharp_turn_prob = cfg["env"][k]["sharpTurnProb"]
         self._sharp_turn_angle = cfg["env"][k]["sharpTurnAngle"]
         self._fail_dist = cfg["env"][k]["failDist"]
+
+        reward_cfg = cfg["env"][k].get("reward", {})
+        self._traj_rwd_pos_weight = reward_cfg.get("posWeight", 0.3)
+        self._traj_rwd_track_lin_vel_weight = reward_cfg.get("trackLinVelWeight", 1.0)
+        self._traj_rwd_track_ang_vel_weight = reward_cfg.get("trackAngVelWeight", 0.5)
+        self._traj_rwd_alive_weight = reward_cfg.get("aliveWeight", 0.15)
+        self._traj_rwd_lin_vel_z_penalty_weight = reward_cfg.get("linVelZPenaltyWeight", -2.0)
+        self._traj_rwd_ang_vel_xy_penalty_weight = reward_cfg.get("angVelXYPenaltyWeight", -0.05)
+        self._traj_rwd_flat_orientation_penalty_weight = reward_cfg.get("flatOrientationPenaltyWeight", -5.0)
+        self._traj_rwd_base_height_penalty_weight = reward_cfg.get("baseHeightPenaltyWeight", -10.0)
+        self._traj_rwd_base_height_target = reward_cfg.get("baseHeightTarget", 0.78)
+        self._traj_rwd_joint_vel_penalty_weight = reward_cfg.get("jointVelPenaltyWeight", -0.001)
+        self._traj_rwd_action_rate_penalty_weight = reward_cfg.get("actionRatePenaltyWeight", -0.05)
+        self._traj_rwd_dof_pos_limits_penalty_weight = reward_cfg.get("dofPosLimitsPenaltyWeight", -5.0)
+        self._traj_rwd_feet_slide_penalty_weight = reward_cfg.get("feetSlidePenaltyWeight", -0.2)
+        self._traj_rwd_feet_clearance_weight = reward_cfg.get("feetClearanceWeight", 1.0)
+        self._traj_rwd_feet_clearance_target = reward_cfg.get("feetClearanceTarget", 0.10)
+        self._traj_rwd_feet_clearance_std = reward_cfg.get("feetClearanceStd", 0.05)
+        self._traj_rwd_target_speed = reward_cfg.get("targetSpeed", 1.0)
 
         self._num_tasks += 1
         self._each_subtask_obs_size.append(2 * self._num_traj_samples)
@@ -1043,6 +1065,8 @@ class HumanoidTrajSitCarryClimb(Humanoid):
     def _compute_reward(self, actions):
         root_pos = self._humanoid_root_states[..., 0:3]
         root_rot = self._humanoid_root_states[..., 3:7]
+        root_vel = self._humanoid_root_states[..., 7:10]
+        root_ang_vel = self._humanoid_root_states[..., 10:13]
         sit_object_pos = self._sit_object_states[..., 0:3]
         sit_object_rot = self._sit_object_states[..., 3:7]
         climb_object_pos = self._climb_object_states[..., 0:3]
@@ -1057,12 +1081,30 @@ class HumanoidTrajSitCarryClimb(Humanoid):
         time = self.progress_buf * self.dt
         env_ids = torch.arange(self.num_envs, device=self.device, dtype=torch.long)
         traj_tar_pos = self._traj_gen.calc_pos(env_ids, time)
+        next_traj_tar_pos = self._traj_gen.calc_pos(env_ids, time + self.dt)
 
         reward = self.rew_buf.clone()
 
         traj_env_mask = self._task_indicator == HumanoidTrajSitCarryClimb.TaskUID["traj"].value
         if traj_env_mask.sum() > 0:
-            reward[traj_env_mask] = compute_traj_reward(root_pos[traj_env_mask], traj_tar_pos[traj_env_mask])
+            reward[traj_env_mask] = compute_g1_loco_reward(
+                root_pos[traj_env_mask], root_rot[traj_env_mask],
+                root_vel[traj_env_mask], root_ang_vel[traj_env_mask],
+                self._dof_pos[traj_env_mask], self._dof_vel[traj_env_mask],
+                self.dof_limits_lower, self.dof_limits_upper,
+                self._rigid_body_pos[traj_env_mask], self._rigid_body_vel[traj_env_mask],
+                self._contact_forces[traj_env_mask], feet_ids,
+                actions[traj_env_mask], self._prev_actions_for_reward[traj_env_mask],
+                traj_tar_pos[traj_env_mask], next_traj_tar_pos[traj_env_mask], self.dt,
+                self._traj_rwd_pos_weight, self._traj_rwd_track_lin_vel_weight,
+                self._traj_rwd_track_ang_vel_weight, self._traj_rwd_alive_weight,
+                self._traj_rwd_lin_vel_z_penalty_weight, self._traj_rwd_ang_vel_xy_penalty_weight,
+                self._traj_rwd_flat_orientation_penalty_weight, self._traj_rwd_base_height_penalty_weight,
+                self._traj_rwd_base_height_target, self._traj_rwd_joint_vel_penalty_weight,
+                self._traj_rwd_action_rate_penalty_weight, self._traj_rwd_dof_pos_limits_penalty_weight,
+                self._traj_rwd_feet_slide_penalty_weight, self._traj_rwd_feet_clearance_weight,
+                self._traj_rwd_feet_clearance_target, self._traj_rwd_feet_clearance_std,
+                self._traj_rwd_target_speed)
         
         sit_env_mask = self._task_indicator == HumanoidTrajSitCarryClimb.TaskUID["sit"].value
         if sit_env_mask.sum() > 0:
@@ -1097,6 +1139,8 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             self.rew_buf[:] = reward + power_reward
         else:
             self.rew_buf[:] = reward
+
+        self._prev_actions_for_reward[:] = actions
 
         if self._enable_IET:
             IET_tar_pos = torch.zeros_like(self._sit_tar_pos)
@@ -1517,7 +1561,7 @@ class HumanoidTrajSitCarryClimb(Humanoid):
 
     def _map_motion_body_state_to_asset(self, body_state):
         body_ids = getattr(self, "_asset_to_motion_body_ids", None)
-        if body_ids is None or body_state.shape[1] == self.num_bodies:
+        if body_ids is None:
             return body_state
         if body_ids.shape[0] != self.num_bodies:
             raise RuntimeError(
@@ -1888,6 +1932,9 @@ class HumanoidTrajSitCarryClimb(Humanoid):
             self._IET_step_buf[env_ids] = 0
             self._IET_triggered_buf[env_ids] = 0
         
+        if hasattr(self, "_prev_actions_for_reward"):
+            self._prev_actions_for_reward[env_ids] = 0.0
+
         if self._is_eval:
             self._success_buf[env_ids] = 0
             self._precision_buf[env_ids] = float('Inf')

@@ -57,6 +57,24 @@ env:
     sharpTurnProb: 0.02
     sharpTurnAngle: 1.57
     failDist: 4.0
+    reward:
+      targetSpeed: 1.0
+      posWeight: 0.3
+      trackLinVelWeight: 1.0
+      trackAngVelWeight: 0.5
+      aliveWeight: 0.15
+      linVelZPenaltyWeight: -2.0
+      angVelXYPenaltyWeight: -0.05
+      flatOrientationPenaltyWeight: -5.0
+      baseHeightPenaltyWeight: -10.0
+      baseHeightTarget: 0.78
+      jointVelPenaltyWeight: -0.001
+      actionRatePenaltyWeight: -0.05
+      dofPosLimitsPenaltyWeight: -5.0
+      feetSlidePenaltyWeight: -0.2
+      feetClearanceWeight: 1.0
+      feetClearanceTarget: 0.10
+      feetClearanceStd: 0.05
     
     skill: ["loco"]
     skillInitProb: [1.0]

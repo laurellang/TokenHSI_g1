@@ -11,6 +11,7 @@ MINIBATCH_SIZE=${MINIBATCH_SIZE:-16384}
 MAX_ITERATIONS=${MAX_ITERATIONS:-0}
 OUTPUT_PATH=${OUTPUT_PATH:-output/g1_dex3_hvd_${NUM_GPUS}gpu_${NUM_ENVS_PER_GPU}env}
 DRY_RUN=${DRY_RUN:-0}
+MOTION_FILE=${MOTION_FILE:-tokenhsi/data/dataset_g1_all.yaml}
 
 export PYTHONPATH=".:tokenhsi:${PYTHONPATH:-}"
 PYTHON_BIN_DIR="$(dirname "${PYTHON_BIN}")"
@@ -22,7 +23,7 @@ CMD=(
   --task HumanoidTrajSitCarryClimb
   --cfg_train tokenhsi/data/cfg/train/rlg/amp_imitation_task_transformer_multi_task.yaml
   --cfg_env tokenhsi/data/cfg/multi_task/amp_g1_dex3_traj_sit_carry_climb.yaml
-  --motion_file tokenhsi/data/dataset_g1_all.yaml
+  --motion_file "${MOTION_FILE}"
   --num_envs "${NUM_ENVS_PER_GPU}"
   --horizon_length "${HORIZON_LENGTH}"
   --minibatch_size "${MINIBATCH_SIZE}"
@@ -73,6 +74,7 @@ echo "  global envs: $((NUM_GPUS * NUM_ENVS_PER_GPU))"
 echo "  horizon: ${HORIZON_LENGTH}"
 echo "  minibatch: ${MINIBATCH_SIZE}"
 echo "  output: ${OUTPUT_PATH}"
+echo "  motion_file: ${MOTION_FILE}"
 echo "  python: ${PYTHON_BIN}"
 echo "  python lib: ${PYTHON_LIB_DIR}"
 echo "  LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"

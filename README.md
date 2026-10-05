@@ -3,9 +3,9 @@
 This project is adapted from [TokenHSI](https://github.com/liangpan99/TokenHSI).
 
 
-## Trajectory Skills
+## Trajectory Skills（AMP）
 
-The traj ckpt support a compelte walking strategy as follows:s
+The traj ckpt support a compelte walking strategy as follows:
 
 <table>
   <tr>
@@ -26,7 +26,7 @@ The traj ckpt support a compelte walking strategy as follows:s
   </tr>
 </table>
 
-## Other three Skills
+## Other three Skills（AMP）
 
 
 <table>

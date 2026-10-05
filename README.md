@@ -15,26 +15,19 @@ The traj ckpt support a compelte walking strategy as follows:s
   </tr>
   <tr>
     <td>
-      <video src="./outputs/traj.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/traj.mp4">Open Traj video</a>
-      </video>
+      <a href="./outputs/traj.mp4"><img src="./outputs/traj.gif" alt="Traj preview" width="280"></a>
     </td>
     <td>
-      <video src="./outputs/traj_原地转弯.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/traj_原地转弯.mp4">Open in-place turning video</a>
-      </video>
+      <a href="./outputs/traj_原地转弯.mp4"><img src="./outputs/traj_原地转弯.gif" alt="In-place turning preview" width="280"></a>
     </td>
     <td>
-      <video src="./outputs/traj_走-停-走.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/traj_走-停-走.mp4">Open walk-stop-walk video</a>
-      </video>
+      <a href="./outputs/traj_走-停-走.mp4"><img src="./outputs/traj_走-停-走.gif" alt="Walk-stop-walk preview" width="280"></a>
     </td>
   </tr>
 </table>
 
-## Skills
+## Other three Skills
 
-other three ckpts:
 
 <table>
   <tr>
@@ -44,19 +37,13 @@ other three ckpts:
   </tr>
   <tr>
     <td>
-      <video src="./outputs/sit.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/sit.mp4">Open sit video</a>
-      </video>
+      <a href="./outputs/sit.mp4"><img src="./outputs/sit.gif" alt="Sit preview" width="280"></a>
     </td>
     <td>
-      <video src="./outputs/climb.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/climb.mp4">Open climb video</a>
-      </video>
+      <a href="./outputs/climb.mp4"><img src="./outputs/climb.gif" alt="Climb preview" width="280"></a>
     </td>
     <td>
-      <video src="./outputs/carry.mp4" type="video/mp4" controls width="280">
-        <a href="./outputs/carry.mp4">Open carry video</a>
-      </video>
+      <a href="./outputs/carry.mp4"><img src="./outputs/carry.gif" alt="Carry preview" width="280"></a>
     </td>
   </tr>
 </table>
@@ -67,8 +54,5 @@ Connect to qwen-3-vl-flash,put g1 in Gibson scene dataset
 Give the command in terminal:"find the bridge and navigate in front of it."
 
 <p align="center">
-  <video src="./outputs/whole_pipeline.mp4" type="video/mp4" controls width="860">
-    <a href="./outputs/whole_pipeline.mp4">Open whole-pipeline video</a>
-  </video>
+  <a href="./outputs/whole_pipeline.mp4"><img src="./outputs/whole_pipeline.gif" alt="Whole pipeline preview" width="860"></a>
 </p>
-
